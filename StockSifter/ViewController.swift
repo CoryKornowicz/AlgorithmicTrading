@@ -22,7 +22,7 @@
 
 //fix
 //after refreshing it crashed because object was deleted and the table view was not refreshed
-//fix background not having a smooth transition
+//fix background not having a smoo myvKif-camqyf-wyrti4th transition
 
 //remove toolbar
 

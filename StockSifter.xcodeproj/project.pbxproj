@@ -123,7 +123,7 @@
 				8B2E21F521004CB30049CC2B /* Sources */,
 				8B2E21F621004CB30049CC2B /* Frameworks */,
 				8B2E21F721004CB30049CC2B /* Resources */,
-				2E7632B988CA683BB5796C13 /* [CP] Embed Pods Frameworks */,
+				4E48EFC1535BAA66C4D3834E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -182,10 +182,12 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2E7632B988CA683BB5796C13 /* [CP] Embed Pods Frameworks */ = {
+		4E48EFC1535BAA66C4D3834E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-StockSifter/Pods-StockSifter-frameworks.sh",
@@ -195,6 +197,8 @@
 				"${BUILT_PRODUCTS_DIR}/SwiftChart/SwiftChart.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProcedureKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
