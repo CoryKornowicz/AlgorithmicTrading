@@ -19,6 +19,7 @@
 // OBV
 //then we can gather a list of all companies that would be good investments
 
+//Fix the selecting cell which presents four smaller views to each graph
 
 //fix
 //after refreshing it crashed because object was deleted and the table view was not refreshed
