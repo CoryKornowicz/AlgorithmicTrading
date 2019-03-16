@@ -339,7 +339,7 @@ PermissionChangeCallback RLMWrapPermissionStatusCallback(RLMPermissionStatusBloc
         return;
     }
     [RLMSyncChangePasswordEndpoint sendRequestToServer:self.authenticationServer
-                                       JSON:@{kRLMSyncTokenKey: self._refreshToken,
+                                       JSON:@{kRLMSyncTokenKey: self.refreshToken,
                                               kRLMSyncUserIDKey: userID,
                                               kRLMSyncDataKey: @{kRLMSyncNewPasswordKey: newPassword}}
                                     options:[[RLMSyncManager sharedManager] networkRequestOptions]
@@ -371,8 +371,7 @@ PermissionChangeCallback RLMWrapPermissionStatusCallback(RLMPermissionStatusBloc
                                     userEmail:(NSString *)email
                                    completion:(RLMPasswordChangeStatusBlock)completion {
     [RLMSyncUpdateAccountEndpoint sendRequestToServer:serverURL
-                                                 JSON:@{@"data": @{@"provider_id": email,
-                                                                   @"action": @"request_email_confirmation"}}
+                                                 JSON:@{@"provider_id": email, @"data": @{@"action": @"request_email_confirmation"}}
                                               options:[[RLMSyncManager sharedManager] networkRequestOptions]
                                            completion:completion];
 }
@@ -397,7 +396,7 @@ PermissionChangeCallback RLMWrapPermissionStatusCallback(RLMPermissionStatusBloc
                                        JSON:@{
                                               kRLMSyncProviderKey: provider,
                                               kRLMSyncProviderIDKey: providerUserIdentity,
-                                              kRLMSyncTokenKey: self._refreshToken
+                                              kRLMSyncTokenKey: self.refreshToken
                                               }
                                     timeout:60
                                     options:[[RLMSyncManager sharedManager] networkRequestOptions]
@@ -534,7 +533,7 @@ static void verifyInRunLoop() {
     });
 }
 
-- (NSString *)_refreshToken {
+- (NSString *)refreshToken {
     if (!_user) {
         return nil;
     }

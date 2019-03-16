@@ -9,7 +9,8 @@
 /* Begin PBXBuildFile section */
 		8B046201212B2F5E00DB2BD0 /* Procedures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B046200212B2F5E00DB2BD0 /* Procedures.swift */; };
 		8B0A5EF7211015CA00E4CC70 /* RealmFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A5EF6211015CA00E4CC70 /* RealmFunctions.swift */; };
-		8B2E21FD21004CB30049CC2B /* UIApplication.shared.statusBarStyle = .lightContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2E21FC21004CB30049CC2B /* UIApplication.shared.statusBarStyle = .lightContent.swift */; };
+		8B2DFE8221EE73E3000B6DC7 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DFE8121EE73E3000B6DC7 /* SettingsController.swift */; };
+		8B2E21FD21004CB30049CC2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2E21FC21004CB30049CC2B /* AppDelegate.swift */; };
 		8B2E21FF21004CB30049CC2B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2E21FE21004CB30049CC2B /* ViewController.swift */; };
 		8B2E220221004CB30049CC2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B2E220021004CB30049CC2B /* Main.storyboard */; };
 		8B2E220421004CB50049CC2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B2E220321004CB50049CC2B /* Assets.xcassets */; };
@@ -27,8 +28,9 @@
 		1C1272E07C39CEB76EFAE0A5 /* Pods_StockSifter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StockSifter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B046200212B2F5E00DB2BD0 /* Procedures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Procedures.swift; sourceTree = "<group>"; };
 		8B0A5EF6211015CA00E4CC70 /* RealmFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmFunctions.swift; sourceTree = "<group>"; };
+		8B2DFE8121EE73E3000B6DC7 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		8B2E21F921004CB30049CC2B /* StockSifter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StockSifter.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B2E21FC21004CB30049CC2B /* UIApplication.shared.statusBarStyle = .lightContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication.shared.statusBarStyle = .lightContent.swift"; sourceTree = "<group>"; };
+		8B2E21FC21004CB30049CC2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B2E21FE21004CB30049CC2B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8B2E220121004CB30049CC2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8B2E220321004CB50049CC2B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -56,6 +58,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8B2DFE8021EE73C2000B6DC7 /* VC's */ = {
+			isa = PBXGroup;
+			children = (
+				8BB1D8C72102BCC200AB72AB /* TableCell.swift */,
+				8B2E21FE21004CB30049CC2B /* ViewController.swift */,
+				8B2DFE8121EE73E3000B6DC7 /* SettingsController.swift */,
+				8BE17CD421272444002BD70F /* StockDataView.swift */,
+				8B0A5EF6211015CA00E4CC70 /* RealmFunctions.swift */,
+			);
+			path = "VC's";
+			sourceTree = "<group>";
+		};
+		8B2DFE8321EE7406000B6DC7 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8BB1D8C521027CFA00AB72AB /* NetworkingExtension.swift */,
+				8BB1D8C32101C5DA00AB72AB /* CSwiftV.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		8B2DFE8421EE7458000B6DC7 /* DataStructures */ = {
+			isa = PBXGroup;
+			children = (
+				8BB1D8C12101C09500AB72AB /* Company.swift */,
+				8B046200212B2F5E00DB2BD0 /* Procedures.swift */,
+				8B5A1906210827B50077C189 /* AlphaFunctions.swift */,
+			);
+			path = DataStructures;
+			sourceTree = "<group>";
+		};
 		8B2E21F021004CB30049CC2B = {
 			isa = PBXGroup;
 			children = (
@@ -77,16 +110,10 @@
 		8B2E21FB21004CB30049CC2B /* StockSifter */ = {
 			isa = PBXGroup;
 			children = (
-				8B2E21FC21004CB30049CC2B /* UIApplication.shared.statusBarStyle = .lightContent.swift */,
-				8B2E21FE21004CB30049CC2B /* ViewController.swift */,
-				8BE17CD421272444002BD70F /* StockDataView.swift */,
-				8B0A5EF6211015CA00E4CC70 /* RealmFunctions.swift */,
-				8B046200212B2F5E00DB2BD0 /* Procedures.swift */,
-				8B5A1906210827B50077C189 /* AlphaFunctions.swift */,
-				8BB1D8C72102BCC200AB72AB /* TableCell.swift */,
-				8BB1D8C12101C09500AB72AB /* Company.swift */,
-				8BB1D8C521027CFA00AB72AB /* NetworkingExtension.swift */,
-				8BB1D8C32101C5DA00AB72AB /* CSwiftV.swift */,
+				8B2E21FC21004CB30049CC2B /* AppDelegate.swift */,
+				8B2DFE8421EE7458000B6DC7 /* DataStructures */,
+				8B2DFE8021EE73C2000B6DC7 /* VC's */,
+				8B2DFE8321EE7406000B6DC7 /* Extensions */,
 				8B2E220021004CB30049CC2B /* Main.storyboard */,
 				8B2E220321004CB50049CC2B /* Assets.xcassets */,
 				8B2E220521004CB50049CC2B /* LaunchScreen.storyboard */,
@@ -238,8 +265,9 @@
 				8BB1D8C82102BCC200AB72AB /* TableCell.swift in Sources */,
 				8B2E21FF21004CB30049CC2B /* ViewController.swift in Sources */,
 				8B0A5EF7211015CA00E4CC70 /* RealmFunctions.swift in Sources */,
-				8B2E21FD21004CB30049CC2B /* UIApplication.shared.statusBarStyle = .lightContent.swift in Sources */,
+				8B2E21FD21004CB30049CC2B /* AppDelegate.swift in Sources */,
 				8BB1D8C42101C5DA00AB72AB /* CSwiftV.swift in Sources */,
+				8B2DFE8221EE73E3000B6DC7 /* SettingsController.swift in Sources */,
 				8B046201212B2F5E00DB2BD0 /* Procedures.swift in Sources */,
 				8BE17CD521272444002BD70F /* StockDataView.swift in Sources */,
 				8BB1D8C621027CFA00AB72AB /* NetworkingExtension.swift in Sources */,
@@ -321,7 +349,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -375,7 +403,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -392,6 +420,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T846R7C892;
 				INFOPLIST_FILE = StockSifter/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -411,6 +440,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T846R7C892;
 				INFOPLIST_FILE = StockSifter/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
