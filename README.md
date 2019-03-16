@@ -1,4 +1,4 @@
-# StockSifter
+# Algorithmic Stock Trading on iOS
 Algorithmic Stock Trading
 
 This project is currently compiled for Xcode 10 and iOS Beta 12 and Swift 4.2
