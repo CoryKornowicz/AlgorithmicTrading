@@ -369,7 +369,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     
-    func parseCompanyInformation(company: Company, index: IndexPath?) {
+    func parseCompanyInformation(company: Company, index: IndexPath?, completion: (() -> Void)?) {
 
         let companyMACD = AlphaURLGenerator.init(companySymbol: company.symbol).baseMACDString()
         
@@ -394,6 +394,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 }
                 self.tableVC.reloadRows(at: [procedure.task.2!], with: .fade)
                 self.initilaize(reloadTableView: false)
+                if (completion != nil){
+                    completion!()
+                }
             }
         }
         
@@ -543,7 +546,11 @@ extension ViewController {
         
         if self.filteredCompanies[indexPath.row].macd == nil {
             print("fetching MACD")
-            self.parseCompanyInformation(company: self.filteredCompanies[indexPath.row], index: indexPath)
+            self.parseCompanyInformation(company: self.filteredCompanies[indexPath.row], index: indexPath){
+                let stockViewController = StockDataView()
+                stockViewController.company = self.filteredCompanies[indexPath.row]
+                self.navigationController?.pushViewController(stockViewController, animated: true)
+            }
         } else {
             let stockViewController = StockDataView()
             stockViewController.company = self.filteredCompanies[indexPath.row]
@@ -561,7 +568,7 @@ extension ViewController {
         let action = UIContextualAction(style: .normal, title: title,
                                         handler: { (action, view, completionHandler) in
                                             // Update data source when user taps action
-                                            self.parseCompanyInformation(company: self.filteredCompanies[indexPath.row], index: indexPath)
+                                            self.parseCompanyInformation(company: self.filteredCompanies[indexPath.row], index: indexPath, completion: nil)
                                             completionHandler(true)
                                         })
         action.image = nil

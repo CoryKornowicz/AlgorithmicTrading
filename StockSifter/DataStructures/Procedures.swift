@@ -192,7 +192,6 @@ class DataFetchTaskProcedure: Procedure, OutputProcedure {
                         })
                         let newMACD = MACD()
                         newMACD.values = values
-                        //print("-------------------------------------------------------------------------------------------")
                         completion(newMACD)
                         print("done with fetching task")
                     } else {
