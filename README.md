@@ -1,6 +1,6 @@
 # Algorithmic Stock Trading on iOS
 Algorithmic Stock Trading
 
-This project is currently compiled for Xcode 10 and iOS Beta 12 and Swift 4.2
+This project is currently compiled in Xcode 10.1 and iOS 12.0 and Swift 4.2
 
-Later support for other iOS's is planned in a future release
+Currently it fetches MACD information on stocks, later support for other technical indicators is planned, as well as loading in neural networks to predict the success of stocks
