@@ -57,3 +57,52 @@ extension ViewController {
     }
     
 }
+
+extension CollectionViewController {
+    
+    func pushObjectToRealm(object: Object) {
+        DispatchQueue.main.async {
+            let realm = try! Realm()
+            try! realm.write {
+                realm.add(object, update: true)
+            }
+            realm.refresh()
+        }
+    }
+    
+    func purgeRealm() {
+        DispatchQueue.main.async {
+            let realm = try! Realm()
+            try! realm.write {
+                realm.deleteAll()
+            }
+            realm.refresh()
+        }
+    }
+    
+    func pushObjectsToRealm(objects: [Object]) {
+        DispatchQueue.main.async {
+            let realm = try! Realm()
+            try! realm.write {
+                realm.add(objects, update: true)
+            }
+            realm.refresh()
+        }
+    }
+    
+    func removeObjectsFromRealm(objects: [Object]) {
+        DispatchQueue.main.async {
+            let realm = try! Realm()
+            try! realm.write {
+                realm.delete(objects)
+            }
+            realm.refresh()
+        }
+    }
+    
+    func retrieveObjectsFromRealm() -> Results<Company> {
+        let realm = try! Realm()
+        return realm.objects(Company.self)
+    }
+    
+}

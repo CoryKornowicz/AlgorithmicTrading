@@ -31,11 +31,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let nav1 = UINavigationController()
         
-        let mainView = ViewController(nibName: nil, bundle: nil) //ViewController = Name of your controller
+        //let mainView = ViewController(nibName: nil, bundle: nil) //ViewController = Name of your controller
+        //let mainView = CollectionViewController.init(nibName: "CollectionViewController", bundle: nil)
+        
+        let mainView = CollectionViewController()
         
         nav1.viewControllers = [mainView]
         nav1.tabBarItem = UITabBarItem(title: "Companies", image: nil, tag: 0)
-        
         
         //second settings controller
         

@@ -39,8 +39,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var filteredCompanies: [Company] = []
     
     var definedMarkets = ["AMEX": URL(string: "https://www.nasdaq.com/screening/companies-by-industry.aspx?exchange=AMEX&render=download"),
-                         "NASDAQ": URL(string: "https://www.nasdaq.com/screening/companies-by-industry.aspx?exchange=NASDAQ&render=download"),
-                         "NYSE": URL(string: "https://www.nasdaq.com/screening/companies-by-industry.aspx?exchange=NYSE&render=download")]
+                          "NASDAQ": URL(string: "https://www.nasdaq.com/screening/companies-by-industry.aspx?exchange=NASDAQ&render=download"),
+                          "NYSE": URL(string: "https://www.nasdaq.com/screening/companies-by-industry.aspx?exchange=NYSE&render=download")]
     
 //    var nasdaqURL = URL(string: "https://www.nasdaq.com/screening/companies-by-industry.aspx?exchange=NASDAQ&render=download")
 //    var nyseURL = URL(string: "https://www.nasdaq.com/screening/companies-by-industry.aspx?exchange=NYSE&render=download")
@@ -68,7 +68,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }()
     
     var fireDate = Date()
-    var lastIndex = 0
     var timer : Timer!
     
     var arrOfDataPro = [DataFetchTaskProcedure]()
@@ -82,9 +81,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.timer = Timer.scheduledTimer(withTimeInterval: TimeInterval(60.0), repeats: false, block: { (_) in
+            self.groupQueue.isSuspended = false
+        })
+        
         self.updateBool = UserDefaults.standard.bool(forKey: "AutoUpdate")
         let markets = UserDefaults.standard.array(forKey: "Markets")
-        self.markets = getMarketDictFromArr(arr: markets as! [String])
+        
+        if markets != nil {
+            self.markets = getMarketDictFromArr(arr: markets as! [String])
+        }
         
         setupView()
 
@@ -124,7 +130,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.updateBool = UserDefaults.standard.bool(forKey: "AutoUpdate")
         let markets = UserDefaults.standard.array(forKey: "Markets")
         
-        self.markets = getMarketDictFromArr(arr: markets as! [String])
+        if markets != nil {
+            self.markets = getMarketDictFromArr(arr: markets as! [String])
+
+        }
         
         let wiped = UserDefaults.standard.bool(forKey: "Wiped Data")
         
@@ -143,7 +152,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         var urls = [URL]()
         
         self.markets.forEach { (arg0) in
-            let (_, value) = arg0
+            let (_, _) = arg0
             urls.append(arg0.value)
         }
         
@@ -219,7 +228,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableVC.dataSource = self
         tableVC.delegate = self
         tableVC.backgroundColor = .white
-        tableVC.register(TableViewCell.self, forCellReuseIdentifier: "stockCell")
+        tableVC.separatorInset = UIEdgeInsets.zero
+        tableVC.separatorColor = .clear
+        tableVC.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
         
         view.addSubview(tableVC)
         
@@ -249,6 +260,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         self.queueItem?.isEnabled = false
         
+        var lastIndex = 0;
+        
         //create procedures to fetch multiple parseCompanies (5) and then compare the date and if it exceeds 1 minute call again, else create a timer for the difference in time and fire it
         
         for index in 0...self.filteredCompanies.count - 1 {
@@ -261,80 +274,62 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         var newGroup = GroupProcedure()
         
-        for i in stride(from: 4, through: arrOfDataPro.count, by: 5){
+        for i in stride(from: 5, through: arrOfDataPro.count, by: 5){
             var proceduresToAdd = [DataFetchTaskProcedure]()
-            proceduresToAdd = Array(arrOfDataPro[lastIndex...i])
+            proceduresToAdd = Array(arrOfDataPro[lastIndex..<i])
             newGroup.addChildren(proceduresToAdd)
             arrOfGroupedData.append(newGroup)
             newGroup = GroupProcedure()
-            lastIndex=i+1
+            lastIndex=i
         }
         
         print(lastIndex)
-        print(self.filteredCompanies.count)
+        print(arrOfDataPro.count)
         
-        if (lastIndex < self.filteredCompanies.count){
-            print(String(self.filteredCompanies.count - lastIndex) + " companies remaining")
+        if (lastIndex < arrOfDataPro.count){
+            print(String(arrOfDataPro.count - lastIndex) + " companies remaining")
+            
+            var proceduresToAdd = [DataFetchTaskProcedure]()
+            proceduresToAdd = Array(arrOfDataPro[lastIndex...arrOfDataPro.count-1])
+            newGroup.addChildren(proceduresToAdd)
+            arrOfGroupedData.append(newGroup)
+            
         }
-    
+
+        print(arrOfGroupedData.count)
         
-        /*
-         
-            newGroup.addWillExecuteBlockObserver { (_, _) in
+        arrOfGroupedData.forEach { (group) in
+            
+            group.addWillExecuteBlockObserver { (_, _) in
                 //uiloader update and setting the date
                 DispatchQueue.main.async {
                     UIApplication.shared.isNetworkActivityIndicatorVisible = true
-                    self.fireDate = Date()
                 }
             }
             
-            newGroup.addDidFinishBlockObserver { (_, _) in
+            group.addDidFinishBlockObserver { (_, _) in
                 //date comparison and loading the next group onto the global queue
-                
-                let currentDate = Date()
-                let oneMin = self.fireDate.addingTimeInterval(60)
-                
-                if currentDate > oneMin {
-                    //it has been over a minute, all the groups are added in advance so it should jsut escape and let the next one continue
-                    DispatchQueue.main.async {
-                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                    }
-                } else {
-                    //it has not been a minute, create a timer object and set its fire date to be the remaining time, pause and resume the queue
-                    self.groupQueue.isSuspended = true
-                    self.timer = Timer(timeInterval: oneMin.timeIntervalSinceNow, repeats: false, block: { (timer) in
-                        self.groupQueue.isSuspended = false
-                        timer.invalidate()
-                    })
-                    
-                }
+                self.groupQueue.isSuspended = true
+                self.timer.fire()
                 
                 if self.groupQueue.operationCount == 0 {
                     self.queueItem?.isEnabled = true
                 }
-        
+                
             }
             
-            arrOfGroupedData.append(newGroup)
         }
         
-        arrOfGroupedData.forEach { (group) in
-            groupQueue.addOperation(group)
-        }
+        groupQueue.addOperations(arrOfGroupedData)
+        
         
         arrOfDataPro = [DataFetchTaskProcedure]()
         arrOfGroupedData = [GroupProcedure]()
-        
-        */
+    
+        print("Finished Successfully")
         
         //Work on timing functions or process data from outside server that I host and update on my own lesiure
-//        for company in self.filteredCompanies {
-//            if company.macd == nil {
-//                let index = IndexPath(item: self.filteredCompanies.firstIndex(of: company)!, section: 0)
-////                print(index)
-//                parseCompanyInformation(company: company, index: index)
-//            }
-//        }
+
     }
     
     func parseCompanyInformationReturnProcedure(company: Company, index: IndexPath?) -> DataFetchTaskProcedure {
@@ -472,7 +467,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 //                self.removeObjectsFromRealm(objects: companiesToRemove)
 //
                 
-                defer {
+                do {
                     print("done filtering companies")
                     UIApplication.shared.isNetworkActivityIndicatorVisible = false
                     self.refreshItem?.isEnabled = true
@@ -527,11 +522,14 @@ extension ViewController {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = TableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
         
         if filteredCompanies.count > 0 {
-            cell.textLabel?.text = filteredCompanies[indexPath.row].name
-            cell.detailTextLabel?.text = filteredCompanies[indexPath.row].symbol
+            
+            cell.label.text = filteredCompanies[indexPath.row].symbol
+            
+            //cell.textLabel?.text = filteredCompanies[indexPath.row].name
+            //cell.detailTextLabel?.text = filteredCompanies[indexPath.row].symbol
             
             if self.filteredCompanies[indexPath.row].macd != nil {
                 cell.accessoryType = .checkmark
@@ -557,9 +555,11 @@ extension ViewController {
             self.navigationController?.pushViewController(stockViewController, animated: true)
         }
         
-        defer{ tableView.deselectRow(at: indexPath, animated: true) }
+        do{ tableView.deselectRow(at: indexPath, animated: true) }
  
     }
+    
+    //TODO: implement into CollectionView or tap to enlarge cell
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         // Get current state from data source
@@ -575,6 +575,10 @@ extension ViewController {
         action.backgroundColor = .blue
         let configuration = UISwipeActionsConfiguration(actions: [action])
         return configuration
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 88
     }
     
 }

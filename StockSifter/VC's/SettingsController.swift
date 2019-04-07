@@ -186,6 +186,13 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
             print("Wipe all data")
             self.purgeRealm()
             UserDefaults.standard.set(true, forKey: "Wiped Data")
+            
+            self.markets = [String]()
+            UserDefaults.standard.set(self.markets, forKey: "Markets")
+            self.marketTable.visibleCells.forEach({ (cell) in
+                cell.accessoryType = .none
+            })
+    
         }
         
         let action2 = UIAlertAction(title: "Cancel", style: .cancel) { (action:UIAlertAction) in

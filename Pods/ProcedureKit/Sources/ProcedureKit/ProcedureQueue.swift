@@ -328,7 +328,7 @@ open class ProcedureQueue: OperationQueue {
 
         // Procedure subclass
 
-        procedure.system.verbose.message("Adding to queue")
+        procedure.log.verbose.message("Adding to queue")
 
         /// Add an observer to invoke the will finish delegate method
         procedure.addWillFinishBlockObserver { [weak self] procedure, error, pendingFinish in
@@ -403,8 +403,9 @@ open class ProcedureQueue: OperationQueue {
         static func ==(lhs: ExclusivityLockTicket, rhs: ExclusivityLockTicket) -> Bool {
             return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
         }
-        var hashValue: Int {
-            return ObjectIdentifier(self).hashValue
+        
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(ObjectIdentifier(self).hashValue)
         }
     }
 

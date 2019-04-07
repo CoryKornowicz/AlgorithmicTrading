@@ -215,7 +215,7 @@ open class RepeatProcedure<T: Operation>: GroupProcedure {
         assert(!isFinished, "Cannot add next operation after the procedure has finished.")
         let promise = ProcedurePromiseResult<Bool>()
         dispatchEvent {
-            let result = self._addNextOperation(shouldAddNext)
+            let result = self._addNextOperation(shouldAddNext())
             promise.complete(withResult: result)
         }
         return promise.future
@@ -229,8 +229,8 @@ open class RepeatProcedure<T: Operation>: GroupProcedure {
 
         guard shouldAddNext(), let payload = _next() else { return false }
 
-        system.verbose.trace()
-        system.info.message("Will add next operation.")
+        log.verbose.trace()
+        log.info.message("Will add next operation.")
 
         _repeatStateLock.withCriticalScope {
             if let newConfigureBlock = payload.configure {
@@ -321,8 +321,8 @@ open class RepeatProcedure<T: Operation>: GroupProcedure {
     // of the _repeatStateLock.
     private func _replace(configureBlock block: @escaping Payload.ConfigureBlock) {
         _configure = block
-        system.verbose.trace()
-        system.verbose.message("did replace configure block.")
+        log.verbose.trace()
+        log.verbose.message("did replace configure block.")
     }
 }
 
@@ -333,7 +333,7 @@ open class RepeatProcedure<T: Operation>: GroupProcedure {
 /// trigger another repeated value. In other words, the current
 /// just finished instance determines whether a new instance is
 /// executed next, or the repeating finishes.
-@available(*, deprecated: 4.6.0, message: "Use RepeatProcedure or RetryProcedure instead")
+@available(*, deprecated, message: "Use RepeatProcedure or RetryProcedure instead")
 public protocol Repeatable {
 
     /// Determines whether or not a subsequent instance of the
@@ -344,7 +344,7 @@ public protocol Repeatable {
     func shouldRepeat(count: Int) -> Bool
 }
 
-@available(*, deprecated: 4.6.0, message: "Use RepeatProcedure or RetryProcedure instead")
+@available(*, deprecated, message: "Use RepeatProcedure or RetryProcedure instead")
 extension RepeatProcedure where T: Repeatable {
 
     /// Initialize RepeatProcedure with a WaitStrategy and a closure. The closure returns
@@ -365,7 +365,7 @@ extension RepeatProcedure where T: Repeatable {
     ///   - max: an optional Int, which defaults to nil.
     ///   - wait: a WaitStrategy value, which defaults to .immediate
     ///   - body: an espacing closure which returns an optional T
-    @available(*, deprecated: 4.6.0, message: "Use RepeatProcedure or RetryProcedure instead")
+    @available(*, deprecated, message: "Use RepeatProcedure or RetryProcedure instead")
     public convenience init(dispatchQueue: DispatchQueue? = nil, max: Int? = nil, wait: WaitStrategy = .immediate, body: @escaping () -> T?) {
         self.init(dispatchQueue: dispatchQueue, max: max, wait: wait, iterator: RepeatableGenerator(AnyIterator(body)))
     }
@@ -430,7 +430,7 @@ extension RepeatProcedure: OutputProcedure where T: OutputProcedure {
 
 // MARK: - Iterators
 
-@available(*, deprecated: 4.6.0, message: "Use RepeatProcedure or RetryProcedure instead")
+@available(*, deprecated, message: "Use RepeatProcedure or RetryProcedure instead")
 internal struct RepeatableGenerator<Element: Repeatable>: IteratorProtocol {
 
     private var iterator: CountingIterator<Element>
@@ -592,11 +592,11 @@ public struct IntervalIterator {
 
 public extension Delay {
 
-    public static func iterator(_ iterator: AnyIterator<TimeInterval>) -> AnyIterator<Delay> {
+    static func iterator(_ iterator: AnyIterator<TimeInterval>) -> AnyIterator<Delay> {
         return AnyIterator(MapIterator(iterator) { Delay.by($0) })
     }
 
-    public struct Iterator {
+    struct Iterator {
 
         static func iterator(_ iterator: AnyIterator<TimeInterval>) -> AnyIterator<Delay> {
             return Delay.iterator(iterator)

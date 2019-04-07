@@ -34,17 +34,17 @@ public protocol ProcedureProtocol: class {
 
     // Cancelling
 
-    func cancel(with: Error?)
+    func cancel(with error: Error?)
 
-    func procedureDidCancel(with: Error?)
+    func procedureDidCancel(with error: Error?)
 
     // Finishing
 
-    func finish(with: Error?)
+    func finish(with error: Error?)
 
-    func procedureWillFinish(with: Error?)
+    func procedureWillFinish(with error: Error?)
 
-    func procedureDidFinish(with: Error?)
+    func procedureDidFinish(with error: Error?)
 
     // Observers
 
@@ -57,19 +57,19 @@ public protocol ProcedureProtocol: class {
 
     // Deprecations
 
-    @available(*, deprecated: 5.0.0, message: "Use cancel(with:) instead. This API will now just use the first error.")
+    @available(*, deprecated, message: "Use cancel(with:) instead. This API will now just use the first error.")
     func cancel(withErrors: [Error])
 
-    @available(*, deprecated: 5.0.0, message: "Use procedureDidCancel(with:) instead. This API will now just use the first error.")
+    @available(*, deprecated, message: "Use procedureDidCancel(with:) instead. This API will now just use the first error.")
     func procedureDidCancel(withErrors: [Error])
 
-    @available(*, deprecated: 5.0.0, message: "Use finish(with:) instead. This API will now just use the first error.")
+    @available(*, deprecated, message: "Use finish(with:) instead. This API will now just use the first error.")
     func finish(withErrors: [Error])
 
-    @available(*, deprecated: 5.0.0, message: "Use procedureWillFinish(with:) instead. This API will now just receive a single error.")
+    @available(*, deprecated, message: "Use procedureWillFinish(with:) instead. This API will now just receive a single error.")
     func procedureWillFinish(withErrors: [Error])
 
-    @available(*, deprecated: 5.0.0, message: "Use procedureDidFinish(with:) instead. This API will now just receive a single error.")
+    @available(*, deprecated, message: "Use procedureDidFinish(with:) instead. This API will now just receive a single error.")
     func procedureDidFinish(withErrors: [Error])
 }
 
@@ -82,11 +82,11 @@ public extension ProcedureProtocol {
         return error != nil
     }
 
-    func procedureDidCancel(with: Error?) { }
+    func procedureDidCancel(with error: Error?) { }
 
-    func procedureWillFinish(with: Error?) { }
+    func procedureWillFinish(with error: Error?) { }
 
-    func procedureDidFinish(with: Error?) { }
+    func procedureDidFinish(with error: Error?) { }
 
     // Deprecations
 

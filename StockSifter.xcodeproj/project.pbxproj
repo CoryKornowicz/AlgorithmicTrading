@@ -16,10 +16,14 @@
 		8B2E220421004CB50049CC2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B2E220321004CB50049CC2B /* Assets.xcassets */; };
 		8B2E220721004CB50049CC2B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B2E220521004CB50049CC2B /* LaunchScreen.storyboard */; };
 		8B5A1907210827B50077C189 /* AlphaFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5A1906210827B50077C189 /* AlphaFunctions.swift */; };
+		8B9C18AF22419D7100323C54 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9C18AD22419D7100323C54 /* CollectionViewController.swift */; };
 		8BB1D8C22101C09500AB72AB /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB1D8C12101C09500AB72AB /* Company.swift */; };
 		8BB1D8C42101C5DA00AB72AB /* CSwiftV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB1D8C32101C5DA00AB72AB /* CSwiftV.swift */; };
 		8BB1D8C621027CFA00AB72AB /* NetworkingExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB1D8C521027CFA00AB72AB /* NetworkingExtension.swift */; };
-		8BB1D8C82102BCC200AB72AB /* TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB1D8C72102BCC200AB72AB /* TableCell.swift */; };
+		8BB6FE0422438E7700D30931 /* CompanyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB6FE0322438E7700D30931 /* CompanyCollectionViewCell.swift */; };
+		8BB6FE06224411BF00D30931 /* FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB6FE05224411BF00D30931 /* FlowLayout.swift */; };
+		8BBF124C22416E29000FA889 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBF124A22416E29000FA889 /* TableViewCell.swift */; };
+		8BBF124D22416E29000FA889 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BBF124B22416E29000FA889 /* TableViewCell.xib */; };
 		8BE17CD521272444002BD70F /* StockDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE17CD421272444002BD70F /* StockDataView.swift */; };
 		CDDD6C61706A2A4B5624AD06 /* Pods_StockSifter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C1272E07C39CEB76EFAE0A5 /* Pods_StockSifter.framework */; };
 /* End PBXBuildFile section */
@@ -37,10 +41,14 @@
 		8B2E220621004CB50049CC2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8B2E220821004CB50049CC2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B5A1906210827B50077C189 /* AlphaFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphaFunctions.swift; sourceTree = "<group>"; };
+		8B9C18AD22419D7100323C54 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		8BB1D8C12101C09500AB72AB /* Company.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
 		8BB1D8C32101C5DA00AB72AB /* CSwiftV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSwiftV.swift; sourceTree = "<group>"; };
 		8BB1D8C521027CFA00AB72AB /* NetworkingExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingExtension.swift; sourceTree = "<group>"; };
-		8BB1D8C72102BCC200AB72AB /* TableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCell.swift; sourceTree = "<group>"; };
+		8BB6FE0322438E7700D30931 /* CompanyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyCollectionViewCell.swift; sourceTree = "<group>"; };
+		8BB6FE05224411BF00D30931 /* FlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowLayout.swift; sourceTree = "<group>"; };
+		8BBF124A22416E29000FA889 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		8BBF124B22416E29000FA889 /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		8BE17CD421272444002BD70F /* StockDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockDataView.swift; sourceTree = "<group>"; };
 		BFDA5C4FF73F4E80CDB78EB3 /* Pods-StockSifter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StockSifter.release.xcconfig"; path = "Pods/Target Support Files/Pods-StockSifter/Pods-StockSifter.release.xcconfig"; sourceTree = "<group>"; };
 		FDB213E901F516CCDEEC2433 /* Pods-StockSifter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StockSifter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StockSifter/Pods-StockSifter.debug.xcconfig"; sourceTree = "<group>"; };
@@ -61,11 +69,15 @@
 		8B2DFE8021EE73C2000B6DC7 /* VC's */ = {
 			isa = PBXGroup;
 			children = (
-				8BB1D8C72102BCC200AB72AB /* TableCell.swift */,
+				8BB6FE05224411BF00D30931 /* FlowLayout.swift */,
+				8B9C18AD22419D7100323C54 /* CollectionViewController.swift */,
+				8BB6FE0322438E7700D30931 /* CompanyCollectionViewCell.swift */,
 				8B2E21FE21004CB30049CC2B /* ViewController.swift */,
 				8B2DFE8121EE73E3000B6DC7 /* SettingsController.swift */,
 				8BE17CD421272444002BD70F /* StockDataView.swift */,
 				8B0A5EF6211015CA00E4CC70 /* RealmFunctions.swift */,
+				8BBF124A22416E29000FA889 /* TableViewCell.swift */,
+				8BBF124B22416E29000FA889 /* TableViewCell.xib */,
 			);
 			path = "VC's";
 			sourceTree = "<group>";
@@ -201,6 +213,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B2E220721004CB50049CC2B /* LaunchScreen.storyboard in Resources */,
+				8BBF124D22416E29000FA889 /* TableViewCell.xib in Resources */,
 				8B2E220421004CB50049CC2B /* Assets.xcassets in Resources */,
 				8B2E220221004CB30049CC2B /* Main.storyboard in Resources */,
 			);
@@ -262,13 +275,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8BB1D8C82102BCC200AB72AB /* TableCell.swift in Sources */,
+				8B9C18AF22419D7100323C54 /* CollectionViewController.swift in Sources */,
 				8B2E21FF21004CB30049CC2B /* ViewController.swift in Sources */,
 				8B0A5EF7211015CA00E4CC70 /* RealmFunctions.swift in Sources */,
 				8B2E21FD21004CB30049CC2B /* AppDelegate.swift in Sources */,
 				8BB1D8C42101C5DA00AB72AB /* CSwiftV.swift in Sources */,
 				8B2DFE8221EE73E3000B6DC7 /* SettingsController.swift in Sources */,
 				8B046201212B2F5E00DB2BD0 /* Procedures.swift in Sources */,
+				8BB6FE06224411BF00D30931 /* FlowLayout.swift in Sources */,
+				8BBF124C22416E29000FA889 /* TableViewCell.swift in Sources */,
+				8BB6FE0422438E7700D30931 /* CompanyCollectionViewCell.swift in Sources */,
 				8BE17CD521272444002BD70F /* StockDataView.swift in Sources */,
 				8BB1D8C621027CFA00AB72AB /* NetworkingExtension.swift in Sources */,
 				8B5A1907210827B50077C189 /* AlphaFunctions.swift in Sources */,
